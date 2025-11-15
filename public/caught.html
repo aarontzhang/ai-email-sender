@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Training Result</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: #fafafa;
+            min-height: 100vh;
+            padding: 32px 24px;
+            color: #0f172a;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 720px;
+            margin: 0 auto;
+        }
+
+        .alert-banner {
+            background: #fff7ed;
+            border: 1px solid #fed7aa;
+            border-left: 4px solid #f97316;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 40px;
+        }
+
+        .alert-header {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .alert-icon {
+            flex-shrink: 0;
+            width: 24px;
+            height: 24px;
+            background: #f97316;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 16px;
+            margin-top: 2px;
+        }
+
+        .alert-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #9a3412;
+            letter-spacing: -0.3px;
+        }
+
+        .alert-text {
+            font-size: 15px;
+            color: #7c2d12;
+            line-height: 1.6;
+            margin-left: 36px;
+        }
+
+        .main-content {
+            background: #ffffff;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        h1 {
+            font-size: 28px;
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+
+        .intro {
+            font-size: 16px;
+            color: #475569;
+            margin-bottom: 40px;
+            line-height: 1.6;
+        }
+
+        .section {
+            margin-bottom: 36px;
+        }
+
+        .section:last-of-type {
+            margin-bottom: 0;
+        }
+
+        h2 {
+            font-size: 18px;
+            color: #0f172a;
+            margin-bottom: 16px;
+            font-weight: 600;
+            letter-spacing: -0.3px;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        li {
+            padding: 10px 0;
+            padding-left: 28px;
+            color: #475569;
+            font-size: 15px;
+            line-height: 1.6;
+            position: relative;
+        }
+
+        li::before {
+            content: "";
+            position: absolute;
+            left: 8px;
+            top: 18px;
+            width: 4px;
+            height: 4px;
+            background: #94a3b8;
+            border-radius: 50%;
+        }
+
+        .divider {
+            border: none;
+            border-top: 1px solid #e2e8f0;
+            margin: 32px 0;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .button {
+            display: inline-flex;
+            align-items: center;
+            padding: 11px 20px;
+            background: #3b82f6;
+            color: #ffffff;
+            text-decoration: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            transition: all 0.15s ease;
+            letter-spacing: -0.2px;
+        }
+
+        .button:hover {
+            background: #2563eb;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 640px) {
+            body {
+                padding: 20px 16px;
+            }
+
+            .alert-banner {
+                padding: 20px;
+            }
+
+            .main-content {
+                padding: 28px 24px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+
+            .alert-title {
+                font-size: 17px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="alert-banner">
+            <div class="alert-header">
+                <div class="alert-icon">!</div>
+                <div class="alert-title">Training Exercise Completed</div>
+            </div>
+            <p class="alert-text">You clicked a link from a simulated phishing email. In a real attack scenario, this action could have compromised your credentials or exposed sensitive information.</p>
+        </div>
+
+        <div class="main-content">
+            <h1>Understanding the Risk</h1>
+            <p class="intro">This was a controlled training exercise designed to demonstrate common phishing tactics. By clicking the link, you've helped identify areas where additional security awareness may be beneficial.</p>
+
+            <div class="section">
+                <h2>Warning Signs to Recognize</h2>
+                <ul>
+                    <li>Unexpected communications about packages, deliveries, or account issues</li>
+                    <li>Requests to verify, update, or confirm personal information via email</li>
+                    <li>Sender addresses that don't match the organization's official domain</li>
+                    <li>Urgent or threatening language designed to prompt immediate action</li>
+                    <li>Links that redirect to unfamiliar or suspicious URLs</li>
+                </ul>
+            </div>
+
+            <hr class="divider">
+
+            <div class="section">
+                <h2>Best Practices for Email Security</h2>
+                <ul>
+                    <li>Never click links in unexpected or unsolicited emails</li>
+                    <li>Verify sender identities through official contact methods</li>
+                    <li>Navigate to websites directly rather than through email links</li>
+                    <li>Hover over links to preview destinations before clicking</li>
+                    <li>Report suspicious emails to your IT security team immediately</li>
+                </ul>
+            </div>
+
+            <div class="footer">
+                <a href="/" class="button">Return to Portal</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

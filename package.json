@@ -1,0 +1,21 @@
+{
+  "name": "ai-email-sender",
+  "version": "1.0.0",
+  "description": "AI-powered email sender with clickable links",
+  "main": "api/send-email.js",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "vercel dev",
+    "deploy": "vercel --prod"
+  },
+  "keywords": ["email", "ai", "anthropic", "nodemailer"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "@anthropic-ai/sdk": "^0.30.1",
+    "dotenv": "^16.4.5",
+    "express": "^4.21.1",
+    "nodemailer": "^6.9.15"
+  }
+}
