@@ -1,4 +1,3 @@
-import Anthropic from '@anthropic-ai/sdk';
 import nodemailer from 'nodemailer';
 
 // Email validation
@@ -7,46 +6,26 @@ function isValidEmail(email) {
     return emailRegex.test(email);
 }
 
-// Generate email content using Claude
-async function generateEmailContent(linkUrl) {
-    const anthropic = new Anthropic({
-        apiKey: process.env.ANTHROPIC_API_KEY,
-    });
+// Generate email content with hardcoded template
+function generateEmailContent(linkUrl) {
+    const subject = 'Action Required: Update Your Delivery Address';
 
-    const message = await anthropic.messages.create({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1024,
-        messages: [{
-            role: 'user',
-            content: `Generate a professional email asking the recipient to update their delivery address for an incoming package. The link URL is: ${linkUrl}
+    const body = `
+        <p>Dear Valued Customer,</p>
 
-Requirements:
-- Write a compelling subject line about updating delivery address (on first line, prefixed with "SUBJECT: ")
-- Create email body copy (2-3 short paragraphs) explaining:
-  * They have a package on the way
-  * They need to click the link to confirm or update their delivery address
-- Include a clear call-to-action with the link
-- Keep the tone professional and friendly
-- Format the link as HTML: <a href="${linkUrl}">descriptive text</a>
+        <p>We are writing to inform you that we have a package scheduled for delivery to your address. However, our shipping department has identified that your current address information in our system appears to be incomplete or outdated, which is preventing us from completing the delivery.</p>
 
-Return ONLY the subject line and email body, nothing else.`
-        }]
-    });
+        <p>To ensure your package reaches you without delay, we need you to verify and update your address information in our system. This quick verification process will help us complete your delivery promptly and securely.</p>
 
-    const content = message.content[0].text;
-    const lines = content.split('\n');
+        <p>Please click the link below to update your address information within the next 48 hours to avoid any delivery delays:</p>
 
-    // Extract subject line
-    let subject = 'Check this out!';
-    let body = content;
+        <p><a href="${linkUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px;">Update My Address Information</a></p>
 
-    for (let i = 0; i < lines.length; i++) {
-        if (lines[i].startsWith('SUBJECT:')) {
-            subject = lines[i].replace('SUBJECT:', '').trim();
-            body = lines.slice(i + 1).join('\n').trim();
-            break;
-        }
-    }
+        <p>Thank you for your prompt attention to this matter. If you have any questions, please don't hesitate to contact our customer service team.</p>
+
+        <p>Best regards,<br>
+        Shipping & Logistics Department</p>
+    `;
 
     return { subject, body };
 }
@@ -98,7 +77,7 @@ export default async function handler(req, res) {
         }
 
         // Check for required environment variables
-        const requiredEnvVars = ['ANTHROPIC_API_KEY', 'GMAIL_USER', 'GMAIL_APP_PASSWORD', 'LINK_URL'];
+        const requiredEnvVars = ['GMAIL_USER', 'GMAIL_APP_PASSWORD', 'LINK_URL'];
         const missingVars = requiredEnvVars.filter(varName => !process.env[varName]);
 
         if (missingVars.length > 0) {
@@ -112,8 +91,8 @@ export default async function handler(req, res) {
         // Log that we have the vars (without exposing values)
         console.log('Environment check: All required vars present');
 
-        // Generate email content with AI
-        const { subject, body } = await generateEmailContent(process.env.LINK_URL);
+        // Generate email content
+        const { subject, body } = generateEmailContent(process.env.LINK_URL);
 
         // Send email
         await sendEmail(email, subject, body);
@@ -129,10 +108,6 @@ export default async function handler(req, res) {
         console.error('Error message:', error.message);
 
         // Handle specific error types
-        if (error.message?.includes('Invalid API key')) {
-            return res.status(500).json({ error: 'API configuration error: Invalid Anthropic API key' });
-        }
-
         if (error.message?.includes('Invalid login') || error.message?.includes('Invalid credentials')) {
             return res.status(500).json({ error: 'Email authentication failed: Invalid Gmail credentials' });
         }
