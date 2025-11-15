@@ -18,17 +18,15 @@ async function generateEmailContent(linkUrl) {
         max_tokens: 1024,
         messages: [{
             role: 'user',
-            content: `Generate a professional email informing the recipient that they have a package, but the sender is missing their address information and needs them to update it. The link URL is: ${linkUrl}
+            content: `Generate a professional email asking the recipient to update their delivery address for an incoming package. The link URL is: ${linkUrl}
 
 Requirements:
-- Write a compelling subject line about the package (on first line, prefixed with "SUBJECT: ")
+- Write a compelling subject line about updating delivery address (on first line, prefixed with "SUBJECT: ")
 - Create email body copy (2-3 short paragraphs) explaining:
-  * They have a package waiting
-  * Address information is missing
-  * They need to click the link to update their information
+  * They have a package on the way
+  * They need to click the link to confirm or update their delivery address
 - Include a clear call-to-action with the link
-- Keep the tone professional and urgent (but not alarming)
-- Make it feel legitimate and natural
+- Keep the tone professional and friendly
 - Format the link as HTML: <a href="${linkUrl}">descriptive text</a>
 
 Return ONLY the subject line and email body, nothing else.`
