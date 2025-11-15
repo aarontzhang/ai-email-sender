@@ -6,6 +6,10 @@
       "destination": "/api/$1"
     },
     {
+      "source": "/update-address",
+      "destination": "/update-address.html"
+    },
+    {
       "source": "/(.*)",
       "destination": "/public/$1"
     }
