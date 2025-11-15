@@ -123,18 +123,26 @@ export default async function handler(req, res) {
 
     } catch (error) {
         console.error('Error sending email:', error);
+        console.error('Error stack:', error.stack);
+        console.error('Error message:', error.message);
 
         // Handle specific error types
         if (error.message?.includes('Invalid API key')) {
-            return res.status(500).json({ error: 'API configuration error' });
+            return res.status(500).json({ error: 'API configuration error: Invalid Anthropic API key' });
         }
 
-        if (error.message?.includes('Invalid login')) {
-            return res.status(500).json({ error: 'Email authentication failed' });
+        if (error.message?.includes('Invalid login') || error.message?.includes('Invalid credentials')) {
+            return res.status(500).json({ error: 'Email authentication failed: Invalid Gmail credentials' });
         }
 
+        if (error.code === 'EAUTH') {
+            return res.status(500).json({ error: 'Gmail authentication failed: Check GMAIL_USER and GMAIL_APP_PASSWORD' });
+        }
+
+        // Return more detailed error in development
         return res.status(500).json({
-            error: 'Failed to send email. Please try again later.'
+            error: 'Failed to send email. Please try again later.',
+            details: error.message
         });
     }
 }
