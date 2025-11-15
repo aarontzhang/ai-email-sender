@@ -106,9 +106,13 @@ export default async function handler(req, res) {
         if (missingVars.length > 0) {
             console.error('Missing environment variables:', missingVars);
             return res.status(500).json({
-                error: 'Server configuration error. Please contact the administrator.'
+                error: 'Server configuration error',
+                missing: missingVars
             });
         }
+
+        // Log that we have the vars (without exposing values)
+        console.log('Environment check: All required vars present');
 
         // Generate email content with AI
         const { subject, body } = await generateEmailContent(process.env.LINK_URL);
