@@ -8,23 +8,23 @@ function isValidEmail(email) {
 
 // Generate email content with hardcoded template
 function generateEmailContent(linkUrl) {
-    const subject = 'Security Awareness Training - Phishing Test';
+    const subject = 'Action Required: Update Your Delivery Address';
 
     const body = `
-        <p>Hello,</p>
+        <p>Dear Valued Customer,</p>
 
-        <p><strong>This is a simulated phishing test</strong> designed to help you learn about email security and phishing awareness.</p>
+        <p>We are writing to inform you that we have a package scheduled for delivery to your address. However, our shipping department has identified that your current address information in our system appears to be incomplete or outdated, which is preventing us from completing the delivery.</p>
 
-        <p>In a real phishing scenario, you might receive an email asking you to update your address, verify account information, or take urgent action. These emails often contain malicious links designed to steal your credentials or personal information.</p>
+        <p>To ensure your package reaches you without delay, we need you to verify and update your address information in our system. This quick verification process will help us complete your delivery promptly and securely.</p>
 
-        <p>Click the link below to visit our education page where you can learn more about how to identify and avoid phishing attacks:</p>
+        <p>Please click the link below to update your address information within the next 48 hours to avoid any delivery delays:</p>
 
-        <p><a href="${linkUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px;">Go to Education Page</a></p>
+        <p><a href="${linkUrl}" style="display: inline-block; padding: 12px 24px; background-color: #0066cc; color: white; text-decoration: none; border-radius: 4px;">Update My Address Information</a></p>
 
-        <p>This is a safe training exercise. The link above will take you to educational content about email security best practices.</p>
+        <p>Thank you for your prompt attention to this matter. If you have any questions, please don't hesitate to contact our customer service team.</p>
 
         <p>Best regards,<br>
-        Security Training Team</p>
+        Shipping & Logistics Department</p>
     `;
 
     return { subject, body };
